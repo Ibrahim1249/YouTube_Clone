@@ -19,16 +19,16 @@ function Watch({ setIsToggle, isToggle }) {
 
   useEffect(() => {
     setIsToggle(false);
+    window.scrollTo(0, 0)
   }, [searchParams, setIsToggle]);
 
   const youtube_url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${searchQuery}&key=`;
   const { videos } = useFetch(youtube_url);
   const {videos : videoComments} = useFetch(`https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=${searchQuery}&key=`)
-  console.log(videoComments)
 
   return (
     <>
-      <div className="py-4 px-16 ">
+      <div className="py-4 px-16 w-[1300px]">
    
             <iframe
               width="100%"
@@ -43,7 +43,7 @@ function Watch({ setIsToggle, isToggle }) {
               allowFullScreen
               className="rounded-lg mb-4 "
             ></iframe>
-        <div className="w-[1200px] mb-4">
+        <div className="w-full mb-4">
           <h2 className="mb-4 text-2xl">{videos[0]?.snippet?.title}</h2>
           <div className="flex justify-between items-center mb-4">
             <div className="flex gap-3 items-center">
@@ -82,7 +82,7 @@ function Watch({ setIsToggle, isToggle }) {
               </div>
             </div>
           </div>
-          <div className="bg-slate-200 py-4 px-6 w-[1200px] rounded-lg">
+          <div className="bg-slate-200 py-4 px-6 full rounded-lg">
             <div className="flex mb-2 text-md">
               <p className="text-slate-600  italic pr-2">
                 {formatNumber(Number(videos[0]?.statistics?.viewCount))} Views

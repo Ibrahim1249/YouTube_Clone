@@ -29,7 +29,7 @@ function VideoComment({comment}) {
           </p>
 
           <div className="flex gap-2 items-center">
-            <ThumbUpIcon />
+            <ThumbUpIcon style={{fontSize: "18px"}}/>
             <p>{ comment?.snippet?.topLevelComment?.snippet
               ?.likeCount}</p>
         </div>
