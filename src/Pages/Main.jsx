@@ -6,7 +6,7 @@ import useFetch from '../Constaint/useFetch'
 
 
 function Main({setIsToggle}) {
-     const {videos} = useFetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=`)
+     const {videos , isLoading} = useFetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=`)
     useEffect(() => {
       setIsToggle(true);
   
@@ -16,7 +16,7 @@ function Main({setIsToggle}) {
     <>
       <div className='flex-1 relative'>
       <CategoryList />
-      <VideoContainer videos={videos}/>
+      <VideoContainer videos={videos} isLoading={isLoading}/>
       </div>
     </>
   )

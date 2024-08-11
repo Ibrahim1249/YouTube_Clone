@@ -51,7 +51,7 @@ const navigate = useNavigate()
       <nav className="flex items-center py-4 px-8 justify-between sticky top-0 w-full z-10 bg-slate-50">
         <div className="flex items-center">
           <MenuIcon className="px-1 mx-1 scale-150 cursor-pointer" onClick={handleClick}/>
-          <img src={logo} alt="" className="w-32" />
+           <Link to={"/"}><img src={logo} alt="" className="w-32" /></Link>
         </div>
         <div className="w-[25%] flex">
           <div className="w-full relative">

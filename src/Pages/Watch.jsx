@@ -5,11 +5,13 @@ import ReplyIcon from "@mui/icons-material/Reply";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ContentCutIcon from "@mui/icons-material/ContentCut";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import { formatNumber , timeAgo } from "../Constaint/constaint";
+import { formatNumber, timeAgo } from "../Constaint/constaint";
 import useFetch from "../Constaint/useFetch";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 function Watch({ setIsToggle, isToggle }) {
-  const location = useLocation()
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("v");
 
@@ -18,8 +20,7 @@ function Watch({ setIsToggle, isToggle }) {
   }, [searchParams, setIsToggle]);
 
   const youtube_url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${searchQuery}&key=`;
-  const {videos} = useFetch(youtube_url)
-
+  const { videos } = useFetch(youtube_url);
 
   return (
     <>
@@ -77,27 +78,32 @@ function Watch({ setIsToggle, isToggle }) {
               </div>
             </div>
           </div>
-          <div className="bg-slate-200 py-4 px-6 w-[1200px]">
-          <div className="flex mb-2 text-md">
-            <p className="text-slate-600  italic pr-2">
-              {formatNumber(Number(videos[0]?.statistics?.viewCount))} Views 
-            </p>
-            <p className="text-slate-600  italic">
-              {timeAgo(videos[0]?.statistics?.publishedAt)}
-            </p>
-          </div>
-          <div>
-            {videos[0]?.snippet?.description
-              .split("\n")
-              .map((data, index) => {
-                return <p className="text-sm">{data}</p>;
-              })}
-          </div>
-        </div>
-        </div>
+          <div className="bg-slate-200 py-4 px-6 w-[1200px] ">
+            <div className="flex mb-2 text-md">
+              <p className="text-slate-600  italic pr-2">
+                {formatNumber(Number(videos[0]?.statistics?.viewCount))} Views
+              </p>
+              <p className="text-slate-600  italic">
+                {timeAgo(videos[0]?.statistics?.publishedAt)}
+              </p>
+              <div className="ml-auto" onClick={() => setIsOpen(!isOpen)}>
+                <KeyboardArrowDownIcon className="scale-125 cursor-pointer" />
+              </div>
+            </div>
 
- 
-        
+            {isOpen ? (
+              <div>
+                {videos[0]?.snippet?.description
+                  .split("\n")
+                  .map((data, index) => {
+                    return <p className="text-sm">{data}</p>;
+                  })}
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
       </div>
     </>
   );
