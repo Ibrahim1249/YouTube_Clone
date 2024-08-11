@@ -5,7 +5,7 @@ function Loading() {
   const SkeletonSize = Array.from({ length: 15 }, (_, index) => index);
   return (
     <>
-       <div className="flex flex-wrap gap-8 px-4 justify-center">
+       <div className="flex flex-wrap gap-6 px-4 justify-center">
       {SkeletonSize.map((_, index) => (
         <Box key={index} sx={{ width: '100%', maxWidth: 300 }}>
           <div className="flex flex-col gap-2">

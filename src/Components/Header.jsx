@@ -6,6 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 import SearchItem from "./SearchItem";
 import { Link, useNavigate } from "react-router-dom";
+
 ;
 
 function Header({setIsToggle , isToggle}) {
@@ -45,6 +46,7 @@ const navigate = useNavigate()
      e.preventDefault();
      navigate(`/result?search=${search}`)
   }
+
 
   return (
     <>
