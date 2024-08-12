@@ -3,10 +3,11 @@ import { formatNumber , timeAgo } from "../Constaint/constaint";
 
 function Video({video}) {
 
+
   return (
    <>
     <div className='w-[19%] mb-4 cursor-pointer'>
-       <Link to={`/watch?v=${video?.id}`}>
+       <Link to={`/watch?v=${video?.id}&c=${video?.snippet?.channelId}`}>
        <div className='mb-1'>
            <img src={video?.snippet?.thumbnails?.medium?.url} alt="" className="rounded-lg"/>
         </div>

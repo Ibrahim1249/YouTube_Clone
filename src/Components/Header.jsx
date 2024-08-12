@@ -33,7 +33,7 @@ const navigate = useNavigate()
       const response = await fetch(url);
       const results = await response.json();
       setSearchData(results[1]);
-      console.log(results[1]);
+
     } catch (error) {
       console.log(error.message);
     }
