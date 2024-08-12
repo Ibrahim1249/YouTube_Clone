@@ -37,9 +37,6 @@ function LiveChat() {
     setChat(""); 
   }
 
-
-
-
   return (
     <div className="border-2 my-4 h-full w-full rounded-lg flex flex-col border-black">
       <h3 className="my-4 text-center">Live Chat</h3>
@@ -47,7 +44,7 @@ function LiveChat() {
         {userChat &&
           userChat.map((user, index) => (
             <div key={index} className="mb-1 flex items-center gap-1">
-               <img src={icon} alt="" className="w-10 h-10 rounded-full"/>
+               <img loading="lazy" src={icon} alt="" className="w-10 h-10 rounded-full"/>
                <p className="text-[15px] text-slate-800">{user.name}</p>
                <p className="text-[17px] font-bold pl-2">{user.message}</p>
             </div>
