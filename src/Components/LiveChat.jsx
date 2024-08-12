@@ -41,7 +41,7 @@ function LiveChat() {
 
 
   return (
-    <div className="border-2 my-4 h-[650px] w-[500px] rounded-lg flex flex-col border-black">
+    <div className="border-2 my-4 h-full w-full rounded-lg flex flex-col border-black">
       <h3 className="my-4 text-center">Live Chat</h3>
       <div className="flex-grow flex flex-col-reverse overflow-y-auto px-4">
         {userChat &&

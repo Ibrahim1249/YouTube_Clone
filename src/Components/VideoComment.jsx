@@ -7,7 +7,7 @@ function VideoComment({comment}) {
         <img
           src={
             comment?.snippet?.topLevelComment?.snippet
-              ?.authorProfileImageUrl
+              ?.authorProfileImageUrl ||  comment?.snippet?.authorProfileImageUrl
           }
           alt=""
           className="w-8 h-8 rounded-full"
@@ -16,7 +16,7 @@ function VideoComment({comment}) {
           <p className="text-[15px] font-semibold">
             {
               comment?.snippet?.topLevelComment?.snippet
-                ?.authorDisplayName
+                ?.authorDisplayName || comment?.snippet?.authorDisplayName
             }
             <span className="pl-4 text-[14px]">
               {timeAgo(
@@ -25,7 +25,7 @@ function VideoComment({comment}) {
             </span>
           </p>
           <p className="font-medium text-[16px] mb-1">
-            {comment?.snippet?.topLevelComment?.snippet?.textOriginal}
+            {comment?.snippet?.topLevelComment?.snippet?.textOriginal || comment?.snippet?.textOriginal}
           </p>
 
           <div className="flex gap-2 items-center">

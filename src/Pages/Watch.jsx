@@ -7,18 +7,18 @@ import LiveChat from "../Components/LiveChat";
 import VideoComment from "../Components/VideoComment";
 import RecommendedVideos from "../Components/RecommendedVideos";
 import SingleVideoContent from "../Components/SingleVideoContent";
+import CommentList from "../Components/CommentList";
 
 function Watch({ setIsToggle, isToggle }) {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const videoId = searchParams.get("v");
   const channelId = searchParams.get("c");
-
+  
   useEffect(() => {
     setIsToggle(false);
     window.scrollTo(0, 0);
   }, [searchParams, setIsToggle]);
-
 
   const { videos } = useFetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=`);
   const { videos: videoComments } = useFetch(
@@ -27,7 +27,7 @@ function Watch({ setIsToggle, isToggle }) {
   const { videos: recommendVideos } = useFetch(
     `https://youtube.googleapis.com/youtube/v3/activities?part=snippet%2CcontentDetails&channelId=${channelId}&maxResults=25&key=`
   );
-  console.log(recommendVideos);
+
   return (
     <>
       <div className="py-4 px-16 w-[1300px]">
@@ -52,19 +52,21 @@ function Watch({ setIsToggle, isToggle }) {
 
         <div>
           <h1 className="mb-4 text-xl font-semibold">Comments</h1>
-          {videoComments &&
-            videoComments.map((comment, index) => {
-              return <VideoComment comment={comment} key={index} />;
-            })}
+          {videoComments && <CommentList commentList={videoComments}/>}
         </div>
 
       </div>
-
+     
+     <div className="flex flex-col h-[650px] w-[500px]">
       <LiveChat />
       
-      <div>
-        <h1>Recommended Videos</h1>
-        <RecommendedVideos recommendVideos={recommendVideos[0]} />
+      <div className="w-full">
+        <h1 className="mb-4 text-xl font-medium">Recommended Videos</h1>
+         {recommendVideos?.length > 0 ? recommendVideos?.slice(0,18)?.map((recommendVideo , index)=>{
+            return   <RecommendedVideos recommendVideo={recommendVideo} key={index}/>
+         }) : <div className="text-red-700">No recommendVideo is found !!</div>}
+      
+      </div>
       </div>
     </>
   );

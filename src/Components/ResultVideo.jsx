@@ -6,9 +6,9 @@ function ResultVideo({video}) {
     function handleClick(e){
         e.preventDefault()
          if(video?.id?.videoId){
-            navigate(`/watch?v=${video?.id?.videoId}`)
+            navigate(`/watch?v=${video?.id?.videoId}&c=${video?.snippet?.channelId}`)
          }else{
-            navigate(`/playlist?v=${video?.id?.playlistId}`)
+            navigate(`/playlist?v=${video?.id?.playlistId}&c=${video?.snippet?.channelId}`)
          }
     }
   return (
