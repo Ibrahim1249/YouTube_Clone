@@ -7,8 +7,8 @@ function ResultVideo({video}) {
         e.preventDefault()
          if(video?.id?.videoId){
             navigate(`/watch?v=${video?.id?.videoId}&c=${video?.snippet?.channelId}`)
-         }else{
-            navigate(`/playlist?v=${video?.id?.playlistId}&c=${video?.snippet?.channelId}`)
+         }else if(video?.id?.playlistId){
+            navigate(`/watch?p=${video?.id?.playlistId}&c=${video?.snippet?.channelId}`)
          }
     }
   return (

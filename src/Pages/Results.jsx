@@ -14,7 +14,8 @@ function Results({setIsToggle,isToggle}) {
   useEffect(()=>{
      setIsToggle(true)
   },[])
-
+  
+  console.log(videos)
 
 
   return (
