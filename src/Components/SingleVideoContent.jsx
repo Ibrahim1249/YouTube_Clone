@@ -21,7 +21,11 @@ function SingleVideoContent({videos}) {
   const handleChannelClick = () => {
     if (channelDetails) {
       const channelUserName = channelDetails[0]?.snippet?.customUrl; 
-      navigate(`/${channelUserName}`, { state: { channelDetails } });
+      const channelId = videos[0]?.snippet?.channelId;
+      const playlist = channelDetails[0]?.contentDetails?.relatedPlaylists?.uploads; 
+      navigate(`/${channelUserName}`, { 
+        state: { channelDetails, channelId , playlist},
+      });
     }
   };
   return (

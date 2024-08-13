@@ -33,7 +33,7 @@ function Video({ video }) {
               </span>
               <div className="flex">
                 <p className="text-slate-600 text-sm italic">
-                  {formatNumber(video?.statistics?.viewCount)} Views .
+                  {formatNumber(video?.statistics?.viewCount)} Views . 
                 </p>
                 <p className="text-slate-600 text-sm italic">
                   {timeAgo(video?.snippet?.publishedAt)}
@@ -46,5 +46,5 @@ function Video({ video }) {
     </>
   );
 }
-
+// formatNumber(video?.statistics?.viewCount)
 export default Video;
