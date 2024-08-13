@@ -6,9 +6,24 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { formatNumber, timeAgo } from "../Constaint/constaint";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import React, {  useState } from "react";
+import useFetch from "../Constaint/useFetch";
+import { useNavigate } from "react-router-dom";
 
 function SingleVideoContent({videos}) {
+  console.log(videos)
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const { videos : channelDetails } = useFetch(
+    `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${videos[0]?.snippet?.channelId}&key=`
+  );
+
+
+  const handleChannelClick = () => {
+    if (channelDetails) {
+      const channelUserName = channelDetails[0]?.snippet?.customUrl; 
+      navigate(`/${channelUserName}`, { state: { channelDetails } });
+    }
+  };
   return (
     <>
       <div className="flex justify-between items-center mb-4">
@@ -18,9 +33,12 @@ function SingleVideoContent({videos}) {
             alt=""
             className="w-10 h-10 rounded-full "
           />
-          <p className="font-medium text-slate-700">
-            {videos[0]?.snippet?.channelTitle}
-          </p>
+           <span
+                onClick={handleChannelClick}
+                className="font-medium text-slate-700 cursor-pointer"
+              >
+                {videos[0]?.snippet?.channelTitle}
+              </span>
           <button className="py-2 px-4 border rounded-3xl bg-slate-200 ml-2 hover:bg-slate-300 cursor-pointer transition-all ">
             Subscribe
           </button>

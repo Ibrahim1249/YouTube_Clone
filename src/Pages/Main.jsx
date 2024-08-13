@@ -11,9 +11,7 @@ function Main({setIsToggle , category}) {
     }, [setIsToggle]);
 
     const {videos : videoCategory} = useFetch(`https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=IN&key=`)
-     
 
-  
   return (
     <>
       <div className='flex-1 relative'>

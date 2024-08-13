@@ -15,7 +15,7 @@ function Results({setIsToggle,isToggle}) {
      setIsToggle(true)
   },[])
   
-  console.log(videos)
+
 
 
   return (

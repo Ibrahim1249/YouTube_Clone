@@ -21,6 +21,7 @@ import { BrowserRouter, Route,  Routes } from "react-router-dom"
 import Results from "./Pages/Results"
 import { useState } from "react"
 import Watch from "./Pages/Watch"
+import ChannelDetails from "./Pages/ChannelDetails"
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <Route path="/" element={<Main setIsToggle={setIsToggle}/>}></Route>
          <Route path="/result" element={<Results setIsToggle={setIsToggle} isToggle={isToggle}/>}></Route>
          <Route path="/watch" element={<Watch setIsToggle={setIsToggle} isToggle={isToggle}/>}></Route>
+         <Route path="/:id" element={<ChannelDetails setIsToggle={setIsToggle} isToggle={isToggle}/>}></Route>
         </Routes>
        </div>
     </div>

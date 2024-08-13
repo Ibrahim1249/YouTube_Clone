@@ -7,6 +7,7 @@ function VideoContainer({videos , isLoading}) {
       {videos && videos.map((video,index)=>{
         return <Video key={index} video={video}/>
       })}
+   
    </div>
 
   )
