@@ -1,14 +1,11 @@
 import { Link  , useNavigate} from "react-router-dom";
 
-
 function ChannelVideos({video}) {
     const navigate = useNavigate()
     function handleClick(e){
         e.preventDefault()
-         if(video?.id?.videoId){
-            navigate(`/watch?v=${video?.id?.videoId}&c=${video?.snippet?.channelId}`)
-         }else if(video?.id?.playlistId){
-            navigate(`/watch?p=${video?.id?.playlistId}&c=${video?.snippet?.channelId}`)
+         if(video?.id){
+            navigate(`/watch?v=${video?.contentDetails?.upload?.videoId}&c=${video?.snippet?.channelId}`)
          }
     }
   return (

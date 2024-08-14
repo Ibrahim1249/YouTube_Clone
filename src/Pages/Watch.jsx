@@ -6,6 +6,7 @@ import RecommendedVideos from "../Components/RecommendedVideos";
 import SingleVideoContent from "../Components/SingleVideoContent";
 import CommentList from "../Components/CommentList";
 import PlayListCart from "../Components/PlayListCart";
+import { filterUniqueVideos} from  "../Constaint/constaint";
 
 function Watch({ setIsToggle, isToggle }) {
   const location = useLocation();
@@ -43,12 +44,19 @@ const { videos: videoDetails } = useFetch(videoDetailsUrl);
   const { videos: recommendVideos } = useFetch(
     `https://youtube.googleapis.com/youtube/v3/activities?part=snippet%2CcontentDetails&channelId=${channelId}&maxResults=25&key=`
   );
+  const { videos : channelDetails } = useFetch(
+    `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${channelId}&key=`
+  );
 
  function handleVideoChange(videoId) {
     setCurrentVideoId(videoId);
     searchParams.set("v", videoId);
     navigate(`/watch?v=${videoId}&p=${playListId}&c=${channelId}`);
   }
+  
+  let filterRecommendedVideo = recommendVideos && filterUniqueVideos(recommendVideos)
+  
+  
 
 
   return (
@@ -76,7 +84,7 @@ const { videos: videoDetails } = useFetch(videoDetailsUrl);
             {playListId ? "Playlist: " : "Video: "}
             {videoDetails[0]?.snippet?.title}
           </h2>
-          <SingleVideoContent videos={videoDetails} />
+          <SingleVideoContent videos={videoDetails} channel={channelDetails}/>
         </div>
 
         <div>
@@ -98,8 +106,8 @@ const { videos: videoDetails } = useFetch(videoDetailsUrl);
 
         <div className="w-full">
           <h1 className="mb-4 text-xl font-medium">Recommended Videos</h1>
-          {recommendVideos?.length > 0 ? (
-            recommendVideos?.slice(0, 18)?.map((recommendVideo, index) => {
+          {filterRecommendedVideo?.length > 0 ? (
+            filterRecommendedVideo?.map((recommendVideo, index) => {
               return (
                 <RecommendedVideos
                   recommendVideo={recommendVideo}

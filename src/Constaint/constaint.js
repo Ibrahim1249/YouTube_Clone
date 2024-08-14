@@ -83,3 +83,21 @@ var nameList = [
         return randomText;
       }
       
+      export const filterUniqueVideos = (recommendVideos) => {
+        return recommendVideos?.filter((video, index, self) => {
+          const videoId = video?.contentDetails?.upload?.videoId;
+          const playlistId = video?.contentDetails?.upload?.playlistId;
+  
+          const identifier = videoId || playlistId;
+      
+          if (!identifier) return false; 
+      
+          const isDuplicate = self.findIndex((v) => {
+            const vVideoId = v?.contentDetails?.upload?.videoId;
+            const vPlaylistId = v?.contentDetails?.upload?.playlistId;
+            return (vVideoId || vPlaylistId) === identifier;
+          });
+      
+          return index === isDuplicate;
+        });
+      };

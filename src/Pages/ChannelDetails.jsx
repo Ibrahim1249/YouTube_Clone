@@ -1,9 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import useFetch from "../Constaint/useFetch";
-import VideoContainer from "../Components/VideoContainer";
-import { formatNumber, timeAgo } from "../Constaint/constaint";
-import RecommendedVideos from "../Components/RecommendedVideos";
+import { formatNumber, timeAgo , filterUniqueVideos} from "../Constaint/constaint";
 import ChannelVideos from "../Components/ChannelVideos";
 
 
@@ -11,7 +9,6 @@ function ChannelDetails({ setIsToggle, isToggle }) {
   const location = useLocation();
   const { channelDetails, channelId, playlist } = location.state || {};
 
-  // console.log(channelDetails , channelId , playlist)
   useEffect(() => {
     setIsToggle(true);
   }, []);
@@ -23,6 +20,8 @@ function ChannelDetails({ setIsToggle, isToggle }) {
   const { videos: channelPlaylist } = useFetch(
     `https://youtube.googleapis.com/youtube/v3/playlists?part=snippet%2CcontentDetails&channelId=${channelId}&maxResults=25&key=`
   );
+  
+  let filterChannelRecommendedVideo = channelRecommendedVideos && filterUniqueVideos(channelRecommendedVideos);
 
   return (
     <>
@@ -61,7 +60,7 @@ function ChannelDetails({ setIsToggle, isToggle }) {
           <h1 className="mb-4 text-xl font-medium">For You</h1>
            
            <div className="flex flex-wrap justify-center gap-4">
-              {channelRecommendedVideos && channelRecommendedVideos?.slice(0,10)?.map((video,index)=>{
+              {filterChannelRecommendedVideo && filterChannelRecommendedVideo?.map((video,index)=>{
                  return <ChannelVideos video={video} key={index}/>
               })}
            </div>
@@ -74,7 +73,7 @@ function ChannelDetails({ setIsToggle, isToggle }) {
           <h1 className="mb-4 text-xl font-medium">PlayLists</h1>
            
            <div className="flex flex-wrap justify-center gap-4">
-              {channelPlaylist && channelPlaylist?.slice(0,10)?.map((video,index)=>{
+              {channelPlaylist && channelPlaylist?.slice(0,10).map((video,index)=>{
                  return <ChannelVideos video={video} key={index}/>
               })}
            </div>

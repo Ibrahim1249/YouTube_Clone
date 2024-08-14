@@ -5,26 +5,26 @@ import ContentCutIcon from "@mui/icons-material/ContentCut";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { formatNumber, timeAgo } from "../Constaint/constaint";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import useFetch from "../Constaint/useFetch";
 import { useNavigate } from "react-router-dom";
 
-function SingleVideoContent({videos}) {
-  console.log(videos)
+function SingleVideoContent({ videos, channel }) {
+  console.log(videos);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const { videos : channelDetails } = useFetch(
+  const { videos: channelDetails } = useFetch(
     `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${videos[0]?.snippet?.channelId}&key=`
   );
 
-
   const handleChannelClick = () => {
     if (channelDetails) {
-      const channelUserName = channelDetails[0]?.snippet?.customUrl; 
+      const channelUserName = channelDetails[0]?.snippet?.customUrl;
       const channelId = videos[0]?.snippet?.channelId;
-      const playlist = channelDetails[0]?.contentDetails?.relatedPlaylists?.uploads; 
-      navigate(`/${channelUserName}`, { 
-        state: { channelDetails, channelId , playlist},
+      const playlist =
+        channelDetails[0]?.contentDetails?.relatedPlaylists?.uploads;
+      navigate(`/${channelUserName}`, {
+        state: { channelDetails, channelId, playlist },
       });
     }
   };
@@ -33,16 +33,19 @@ function SingleVideoContent({videos}) {
       <div className="flex justify-between items-center mb-4">
         <div className="flex gap-3 items-center">
           <img
-            src={videos[0]?.snippet?.thumbnails?.default?.url}
+            src={channel[0]?.snippet?.thumbnails?.medium?.url}
             alt=""
             className="w-10 h-10 rounded-full "
           />
-           <span
-                onClick={handleChannelClick}
-                className="font-medium text-slate-700 cursor-pointer"
-              >
-                {videos[0]?.snippet?.channelTitle}
-              </span>
+          <div>
+            <span
+              onClick={handleChannelClick}
+              className="font-medium text-slate-700 cursor-pointer"
+            >
+              {videos[0]?.snippet?.channelTitle}
+            </span>
+             <p>{formatNumber(Number(channel[0]?.statistics?.subscriberCount ))}</p>
+          </div>
           <button className="py-2 px-4 border rounded-3xl bg-slate-200 ml-2 hover:bg-slate-300 cursor-pointer transition-all ">
             Subscribe
           </button>
