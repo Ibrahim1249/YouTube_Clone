@@ -1,6 +1,6 @@
 import { Link  , useNavigate} from "react-router-dom";
 
-function ChannelVideos({video}) {
+function ChannelVideos({video , width}) {
     const navigate = useNavigate()
     function handleClick(e){
         e.preventDefault()
@@ -10,7 +10,7 @@ function ChannelVideos({video}) {
     }
   return (
     <>
-      <div className="w-[19%] mb-4 cursor-pointer" onClick={handleClick}>
+      <div className={`${width ? `w-full` : `w-[19%]`} mb-4 cursor-pointer`} onClick={handleClick}>
           <div className="mb-1">
             <img
               src={video?.snippet?.thumbnails?.medium?.url}

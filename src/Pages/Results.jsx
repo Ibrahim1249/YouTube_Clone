@@ -15,9 +15,6 @@ function Results({setIsToggle,isToggle}) {
      setIsToggle(true)
   },[])
   
-
-
-
   return (
     <>
       <div className="py-8 px-4 flex flex-col justify-center w-[70%] mx-auto">
