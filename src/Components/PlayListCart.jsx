@@ -11,7 +11,7 @@ function PlayListCart({videos, onVideoChange, currentVideoId}) {
   return (
     <>
     <div className={`border-2 my-4 h-full w-[450px] rounded-lg flex flex-col border-black`}>
-      <h3 className="my-4 text-center">Live Chat</h3>
+      <h3 className="my-4 text-center">PlayList</h3>
       <div className="flex-grow flex flex-col overflow-y-auto ">
         {videos &&
           videos.map((video, index) => (
